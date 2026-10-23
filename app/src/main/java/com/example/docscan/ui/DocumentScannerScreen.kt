@@ -155,7 +155,7 @@ fun DocumentPreviewDialog(
                         )
                     }
                     IconButton(onClick = onDismiss) {
-                        Icon(Icons.Default.Close, contentDescription = "Close Preview")
+                        Icon(Icons.Default.Clear, contentDescription = "Close Preview")
                     }
                 }
 
