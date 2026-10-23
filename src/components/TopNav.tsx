@@ -1,18 +1,16 @@
 import React from 'react';
-import { Download, Smartphone } from 'lucide-react';
+import { Download } from 'lucide-react';
 
 interface TopNavProps {
   activeView: 'simulator' | 'code' | 'guide';
   onSelectView: (view: 'simulator' | 'code' | 'guide') => void;
   onDownloadProject: () => void;
-  onPushToPhone: () => void;
 }
 
 export const TopNav: React.FC<TopNavProps> = ({
   activeView,
   onSelectView,
   onDownloadProject,
-  onPushToPhone,
 }) => {
   return (
     <header className="flex items-center justify-between gap-8 px-6 py-3.5 border-b border-slate-800 bg-slate-950 sticky top-0 z-40 select-none">
@@ -67,11 +65,11 @@ export const TopNav: React.FC<TopNavProps> = ({
       {/* Zone 3: 1 primary action */}
       <div className="flex items-center gap-3 shrink-0">
         <button
-          onClick={onPushToPhone}
+          onClick={onDownloadProject}
           className="px-4 py-2 text-xs font-bold text-slate-950 bg-sky-400 rounded-xl hover:bg-sky-300 transition-all flex items-center gap-1.5 shadow-sm active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
         >
-          <Smartphone className="w-4 h-4 text-slate-950" />
-          <span>Push to Phone</span>
+          <Download className="w-3.5 h-3.5" />
+          <span>Get Android Files</span>
         </button>
       </div>
     </header>

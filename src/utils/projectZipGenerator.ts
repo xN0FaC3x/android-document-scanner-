@@ -55,6 +55,52 @@ zipStorePath=wrapper/dists
 `
   );
 
+  // GitHub Actions Workflow to build APK in the cloud
+  zip.file(
+    '.github/workflows/build-apk.yml',
+    `name: Build Android APK
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Make Gradlew Executable
+        run: |
+          if [ ! -f gradlew ]; then
+            gradle wrapper
+          fi
+          chmod +x gradlew
+
+      - name: Build Debug APK with Gradle
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK as Downloadable Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DocScan-Release-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+`
+  );
+
   // App module build.gradle.kts
   zip.file(
     'app/build.gradle.kts',
