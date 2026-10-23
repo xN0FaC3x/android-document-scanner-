@@ -1,0 +1,10 @@
+{
+  "name": "DocScan - Android ML Kit Scanner",
+  "description": "Android Jetpack Compose document scanner app using Google Play Services ML Kit Document Scanner API with edge detection, shadow-removing B&W filter, and PDF export.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
