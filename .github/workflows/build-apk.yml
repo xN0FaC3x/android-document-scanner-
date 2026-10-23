@@ -37,6 +37,7 @@ jobs:
           gradle assembleDebug --stacktrace
 
       - name: Upload APK to Artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: docscan-debug-apk
@@ -49,10 +50,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           APK_FILE=$(ls app/build/outputs/apk/debug/*.apk 2>/dev/null | head -n 1)
-          if [ -f "$APK_FILE" ]; then
+          if [ -n "$APK_FILE" ] && [ -f "$APK_FILE" ]; then
             TAG="v1.0.${{ github.run_number }}"
             gh release create "$TAG" "$APK_FILE" \
               --title "DocScan APK (Build ${{ github.run_number }})" \
-              --notes "Tap the .apk file on your Android phone to install." \
-              --latest || true
+              --notes "Download and tap this .apk file on your phone to install." \
+              --latest || echo "Release creation skipped"
           fi
