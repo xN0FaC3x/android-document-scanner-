@@ -8,7 +8,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -24,10 +24,11 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: DocumentScannerViewModel by viewModels()
+    private lateinit var viewModel: DocumentScannerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[DocumentScannerViewModel::class.java]
 
         val scannerOptions = GmsDocumentScannerOptions.Builder()
             .setGalleryImportAllowed(true)

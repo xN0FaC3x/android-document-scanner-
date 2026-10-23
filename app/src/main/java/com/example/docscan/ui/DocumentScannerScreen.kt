@@ -21,6 +21,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import coil.compose.AsyncImage
 import com.example.docscan.DocumentScannerViewModel
 import com.example.docscan.ScannedDocumentItem
@@ -123,10 +125,9 @@ fun DocumentPreviewDialog(
     var selectedPageIndex by remember { mutableStateOf(0) }
     val pageRotations = doc.pageRotations
 
-    AlertDialog(
+    Dialog(
         onDismissRequest = onDismiss,
-        modifier = Modifier.fillMaxWidth().fillMaxHeight(0.92f),
-        properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false)
+        properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Surface(
             shape = RoundedCornerShape(28.dp),
@@ -194,7 +195,7 @@ fun DocumentPreviewDialog(
                         onClick = { onRotatePage(selectedPageIndex, -90f) },
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                     ) {
-                        Icon(Icons.Default.RotateLeft, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(6.dp))
                         Text("Rotate -90°")
                     }
@@ -207,7 +208,7 @@ fun DocumentPreviewDialog(
                     ) {
                         Text("Rotate +90°")
                         Spacer(modifier = Modifier.width(6.dp))
-                        Icon(Icons.Default.RotateRight, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
                     }
                 }
 
